@@ -4,109 +4,135 @@ using namespace std;
 
 #include <iostream>
 
+#define currentVersion 14;
+
 Beatmap::Beatmap(string b){
 
 };
 
 Beatmap::Beatmap(ifstream &b){
     string line;
+    smatch result;
+
+    // first line of a .osu file contains the version
+    getline(b,line);
+
+    this->osuFileFormat = (
+        regex_search(line, result,regex{"v(\\d+)"})
+    ) ? stoi(result[1]) : currentVersion;
+
     while (getline(b, line)){
-        cout << line << endl;
+        switch (this->osuFileFormat){
+            // I have found that there exists only v3-14
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+
+        }
     }
 };
 
 int Beatmap::getOsuFileFormat(){
-
+    return 1;
 }
 string Beatmap::getAudioFilename(){
-
+    return "";
 }
 int Beatmap::getAudioLeadIn(){
-
+    return 1;
 }
 int Beatmap::getPreviewTime(){
-
+    return 1;
 }
 int Beatmap::getCountdown(){
-
+    return 1;
 }
 string Beatmap::getSampleSet(){
-
+    return "";
 }
 float Beatmap::getStackLeniency(){
-
+    return 1.0;
 }
 int Beatmap::getMode(){
-
+    return 1;
 }
 int Beatmap::getLetterboxInBreaks(){
-
+    return 1;
 }
 int Beatmap::getWidescreenStoryboard(){
-
+    return 1;
 }
 vector<int> Beatmap::getBookmarks(){
 
 }
 float Beatmap::getDistanceSpacing(){
-
+    return 1.0;
 }
 int Beatmap::getBeatDivisor(){
-
+    return 1;
 }
 int Beatmap::getGridSize(){
-
+    return 1;
 }
 int Beatmap::getTimelineZoom(){
-
+    return 1;
 }
 string Beatmap::getTitle(){
-
+    return "";
 }
 string Beatmap::getTitleUnicode(){
-
+    return "";
 }
 string Beatmap::getArtist(){
-
+    return "";
 }
 string Beatmap::getArtistUnicode(){
-
+    return "";
 }
 string Beatmap::getCreator(){
-
+    return "";
 }
 string Beatmap::getVersion(){
-
+    return "";
 }
 string Beatmap::getSource(){
-
+    return "";
 }
 string Beatmap::getTags(){
-
+    return "";
 }
 string Beatmap::getBeatmapID(){
-
+    return "";
 }
 string Beatmap::getBeatmapsetID(){
-
+    return "";
 }
 float Beatmap::getApproachRate(){
-
+    return 1.0;
 }
 float Beatmap::getCircleSize(){
-
+    return 1.0;
 }
 float Beatmap::getOverallDifficulty(){
-
+    return 1.0;
 }
 float Beatmap::getHPDrainRate(){
-
+    return 1.0;
 }
 float Beatmap::getSliderMultiplier(){
-
+    return 1.0;
 }
 float Beatmap::getSliderTickRate(){
-
+    return 1.0;
 }
 //vector<TimingPoint> Beatmap::getTimingPoints(){}
 vector<array<int,3>> Beatmap::getColours(){
