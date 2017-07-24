@@ -2,12 +2,17 @@
 
 using namespace std;
 
+#include <iostream>
+
 Beatmap::Beatmap(string b){
 
 };
 
 Beatmap::Beatmap(ifstream &b){
-
+    string line;
+    while (getline(b, line)){
+        cout << line << endl;
+    }
 };
 
 int Beatmap::getOsuFileFormat(){
@@ -103,20 +108,16 @@ float Beatmap::getSliderMultiplier(){
 float Beatmap::getSliderTickRate(){
 
 }
-vector<TimingPoint> Beatmap::getTimingPoints(){
+//vector<TimingPoint> Beatmap::getTimingPoints(){}
+vector<array<int,3>> Beatmap::getColours(){
 
 }
-vector<std::array<int,3>> Beatmap::getColours(){
-
-}
-vector<HitObject> Beatmap::getHitObjects(){
-
-}
+//vector<HitObject> Beatmap::getHitObjects(){}
 
 void Beatmap::setOsuFileFormat(int osuFileFormat){
 
 }
-void Beatmap::setAudioFilename(std::string audioFilename){
+void Beatmap::setAudioFilename(string audioFilename){
 
 }
 void Beatmap::setAudioLeadIn(int audioLeadIn){
@@ -128,7 +129,7 @@ void Beatmap::setPreviewTime(int previewTime){
 void Beatmap::setCountdown(int countdown){
 
 }
-void Beatmap::setSampleSet(std::string sampleSet){
+void Beatmap::setSampleSet(string sampleSet){
 
 }
 void Beatmap::setStackLeniency(float stackLeniency){
@@ -158,34 +159,34 @@ void Beatmap::setGridSize(int gridSize){
 void Beatmap::setTimelineZoom(int timelineZoom){
 
 }
-void Beatmap::setTitle(std::string title){
+void Beatmap::setTitle(string title){
 
 }
-void Beatmap::setTitleUnicode(std::string titleUnicode){
+void Beatmap::setTitleUnicode(string titleUnicode){
 
 }
-void Beatmap::setArtist(std::string artist){
+void Beatmap::setArtist(string artist){
 
 }
-void Beatmap::setArtistUnicode(std::string artistUnicode){
+void Beatmap::setArtistUnicode(string artistUnicode){
 
 }
-void Beatmap::setCreator(std::string creator){
+void Beatmap::setCreator(string creator){
 
 }
-void Beatmap::setVersion(std::string version){
+void Beatmap::setVersion(string version){
 
 }
-void Beatmap::setSource(std::string source){
+void Beatmap::setSource(string source){
 
 }
-void Beatmap::setTags(std::string tags){
+void Beatmap::setTags(string tags){
 
 }
-void Beatmap::setBeatmapID(std::string beatmapID){
+void Beatmap::setBeatmapID(string beatmapID){
 
 }
-void Beatmap::setBeatmapsetID(std::string beatmapsetID){
+void Beatmap::setBeatmapsetID(string beatmapsetID){
 
 }
 void Beatmap::setApproachRate(float approachRate){
@@ -206,16 +207,12 @@ void Beatmap::setSliderMultiplier(float sliderMultiplier){
 void Beatmap::setSliderTickRate(float sliderTickRate){
 
 }
-void Beatmap::setTimingPoints(std::vector<TimingPoint> timingPoints){
+//void Beatmap::setTimingPoints(vector<TimingPoint> timingPoints){}
+void Beatmap::setColours(vector<array<int,3>> colours){
 
 }
-void Beatmap::setColours(std::vector<std::array<int,3>> colours){
-
-}
-void Beatmap::setHitObjects(std::vector<HitObject> hitObjects){
-
-}
+//void Beatmap::setHitObjects(vector<HitObject> hitObjects){}
 
 void Beatmap::saveBeatmap(){
-    
+
 }

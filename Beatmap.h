@@ -6,8 +6,8 @@
 #include <string>
 #include <vector>
 
-#include "HitObject.h"
-#include "TimingPoint.h"
+//#include "HitObject.h"
+//#include "TimingPoint.h"
 
 class Beatmap {
     private:
@@ -57,12 +57,12 @@ class Beatmap {
         // besides break periods, I am not entirely sure
         // what goes here at the moment
 
-        std::vector<TimingPoint> timingPoints;
+//        std::vector<TimingPoint> timingPoints;
 
         // Colours
         std::vector<std::array<int,3>> colours;
 
-        std::vector<HitObject> hitObjects;
+//        std::vector<HitObject> hitObjects;
     public:
         Beatmap(std::string b);
         Beatmap(std::ifstream &b);
@@ -98,9 +98,9 @@ class Beatmap {
         float getHPDrainRate();
         float getSliderMultiplier();
         float getSliderTickRate();
-        std::vector<TimingPoint> getTimingPoints();
+//        std::vector<TimingPoint> getTimingPoints();
         std::vector<std::array<int,3>> getColours();
-        std::vector<HitObject> getHitObjects();
+//        std::vector<HitObject> getHitObjects();
 
         void setOsuFileFormat(int osuFileFormat);
         void setAudioFilename(std::string audioFilename);
@@ -112,7 +112,7 @@ class Beatmap {
         void setMode(int mode);
         void setLetterboxInBreaks(int letterboxInBreaks);
         void setWidescreenStoryboard(int widescreenStoryboard);
-        void setBookmarks(vector<int> bookmarks);
+        void setBookmarks(std::vector<int> bookmarks);
         void setDistanceSpacing(float distanceSpacing);
         void setBeatDivisor(int beatDivisor);
         void setGridSize(int gridSize);
@@ -133,9 +133,9 @@ class Beatmap {
         void setHPDrainRate(float hPDrainRate);
         void setSliderMultiplier(float sliderMultiplier);
         void setSliderTickRate(float sliderTickRate);
-        void setTimingPoints(std::vector<TimingPoint> timingPoints);
+//        void setTimingPoints(std::vector<TimingPoint> timingPoints);
         void setColours(std::vector<std::array<int,3>> colours);
-        void setHitObjects(std::vector<HitObject> hitObjects);
+//        void setHitObjects(std::vector<HitObject> hitObjects);
 
         void saveBeatmap();
 };
