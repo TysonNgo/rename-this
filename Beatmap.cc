@@ -1,4 +1,5 @@
 #include "Beatmap.h"
+#include "BeatmapVersions.h"
 
 using namespace std;
 
@@ -21,217 +22,214 @@ Beatmap::Beatmap(ifstream &b){
         regex_search(line, result,regex{"v(\\d+)"})
     ) ? stoi(result[1]) : currentVersion;
 
-    while (getline(b, line)){
-        switch (this->osuFileFormat){
-            // I have found that there exists only v3-14
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-
-        }
+    switch (this->osuFileFormat){
+        // I have found that there exists only v3-14
+        case 3: //BeatmapVersions::version3(this);
+        case 4: //BeatmapVersions::version4(this);
+        case 5: //BeatmapVersions::version5(this);
+        case 6: //BeatmapVersions::version6(this);
+        case 7: //BeatmapVersions::version7(this);
+        case 8: //BeatmapVersions::version8(this);
+        case 9: //BeatmapVersions::version9(this);
+        case 10: //BeatmapVersions::version10(this);
+        case 11: //BeatmapVersions::version11(this);
+        case 12: //BeatmapVersions::version12(this);
+        case 13: //BeatmapVersions::version13(this);
+        case 14: BeatmapVersions::version14(this);
     }
 };
 
 int Beatmap::getOsuFileFormat(){
-    return 1;
+    return this->osuFileFormat;
 }
 string Beatmap::getAudioFilename(){
-    return "";
+    return this->audioFilename;
 }
 int Beatmap::getAudioLeadIn(){
-    return 1;
+    return this->audioLeadIn;
 }
 int Beatmap::getPreviewTime(){
-    return 1;
+    return this->previewTime;
 }
 int Beatmap::getCountdown(){
-    return 1;
+    return this->countdown;
 }
 string Beatmap::getSampleSet(){
-    return "";
+    return this->sampleSet;
 }
 float Beatmap::getStackLeniency(){
-    return 1.0;
+    return this->stackLeniency;
 }
 int Beatmap::getMode(){
-    return 1;
+    return this->mode;
 }
 int Beatmap::getLetterboxInBreaks(){
-    return 1;
+    return this->letterboxInBreaks;
 }
 int Beatmap::getWidescreenStoryboard(){
-    return 1;
+    return this->widescreenStoryboard;
 }
 vector<int> Beatmap::getBookmarks(){
-
+    return bookmarks;
 }
 float Beatmap::getDistanceSpacing(){
-    return 1.0;
+    return this->distanceSpacing;
 }
 int Beatmap::getBeatDivisor(){
-    return 1;
+    return this->beatDivisor;
 }
 int Beatmap::getGridSize(){
-    return 1;
+    return this->gridSize;
 }
 int Beatmap::getTimelineZoom(){
-    return 1;
+    return this->timelineZoom;
 }
 string Beatmap::getTitle(){
-    return "";
+    return this->title;
 }
 string Beatmap::getTitleUnicode(){
-    return "";
+    return this->titleUnicode;
 }
 string Beatmap::getArtist(){
-    return "";
+    return this->artist;
 }
 string Beatmap::getArtistUnicode(){
-    return "";
+    return this->artistUnicode;
 }
 string Beatmap::getCreator(){
-    return "";
+    return this->creator;
 }
 string Beatmap::getVersion(){
-    return "";
+    return this->version;
 }
 string Beatmap::getSource(){
-    return "";
+    return this->source;
 }
 string Beatmap::getTags(){
-    return "";
+    return this->tags;
 }
 string Beatmap::getBeatmapID(){
-    return "";
+    return this->beatmapID;
 }
 string Beatmap::getBeatmapsetID(){
-    return "";
+    return this->beatmapsetID;
 }
 float Beatmap::getApproachRate(){
-    return 1.0;
+    return this->approachRate;
 }
 float Beatmap::getCircleSize(){
-    return 1.0;
+    return this->circleSize;
 }
 float Beatmap::getOverallDifficulty(){
-    return 1.0;
+    return this->overallDifficulty;
 }
 float Beatmap::getHPDrainRate(){
-    return 1.0;
+    return this->HPDrainRate;
 }
 float Beatmap::getSliderMultiplier(){
-    return 1.0;
+    return this->sliderMultiplier;
 }
 float Beatmap::getSliderTickRate(){
-    return 1.0;
+    return this->sliderTickRate;
 }
 //vector<TimingPoint> Beatmap::getTimingPoints(){}
 vector<array<int,3>> Beatmap::getColours(){
-
+    return this->colours;
 }
 //vector<HitObject> Beatmap::getHitObjects(){}
 
 void Beatmap::setOsuFileFormat(int osuFileFormat){
-
+    this->osuFileFormat = osuFileFormat;
 }
 void Beatmap::setAudioFilename(string audioFilename){
-
+    this->audioFilename = audioFilename;
 }
 void Beatmap::setAudioLeadIn(int audioLeadIn){
-
+    this->audioLeadIn = audioLeadIn;
 }
 void Beatmap::setPreviewTime(int previewTime){
-
+    this->previewTime = previewTime;
 }
 void Beatmap::setCountdown(int countdown){
-
+    this->countdown = countdown;
 }
 void Beatmap::setSampleSet(string sampleSet){
-
+    this->sampleSet = sampleSet;
 }
 void Beatmap::setStackLeniency(float stackLeniency){
-
+    this->stackLeniency = stackLeniency;
 }
 void Beatmap::setMode(int mode){
-
+    this->mode = mode;
 }
 void Beatmap::setLetterboxInBreaks(int letterboxInBreaks){
-
+    this->letterboxInBreaks = letterboxInBreaks;
 }
 void Beatmap::setWidescreenStoryboard(int widescreenStoryboard){
-
+    this->widescreenStoryboard = widescreenStoryboard;
 }
 void Beatmap::setBookmarks(vector<int> bookmarks){
 
 }
 void Beatmap::setDistanceSpacing(float distanceSpacing){
-
+    this->distanceSpacing = distanceSpacing;
 }
 void Beatmap::setBeatDivisor(int beatDivisor){
-
+    this->beatDivisor = beatDivisor;
 }
 void Beatmap::setGridSize(int gridSize){
-
+    this->gridSize = gridSize;
 }
 void Beatmap::setTimelineZoom(int timelineZoom){
-
+    this->timelineZoom = timelineZoom;
 }
 void Beatmap::setTitle(string title){
-
+    this->title = title;
 }
 void Beatmap::setTitleUnicode(string titleUnicode){
-
+    this->titleUnicode = titleUnicode;
 }
 void Beatmap::setArtist(string artist){
-
+    this->artist = artist;
 }
 void Beatmap::setArtistUnicode(string artistUnicode){
-
+    this->artistUnicode = artistUnicode;
 }
 void Beatmap::setCreator(string creator){
-
+    this->creator = creator;
 }
 void Beatmap::setVersion(string version){
-
+    this->version = version;
 }
 void Beatmap::setSource(string source){
-
+    this->source = source;
 }
 void Beatmap::setTags(string tags){
-
+    this->tags = tags;
 }
 void Beatmap::setBeatmapID(string beatmapID){
-
+    this->beatmapID = beatmapID;
 }
 void Beatmap::setBeatmapsetID(string beatmapsetID){
-
+    this->beatmapsetID = beatmapsetID;
 }
 void Beatmap::setApproachRate(float approachRate){
-
+    this->approachRate = approachRate;
 }
 void Beatmap::setCircleSize(float circleSize){
-
+    this->circleSize = circleSize;
 }
 void Beatmap::setOverallDifficulty(float overallDifficulty){
-
+    this->overallDifficulty = overallDifficulty;
 }
-void Beatmap::setHPDrainRate(float hPDrainRate){
-
+void Beatmap::setHPDrainRate(float HPDrainRate){
+    this->HPDrainRate = HPDrainRate;
 }
 void Beatmap::setSliderMultiplier(float sliderMultiplier){
-
+    this->sliderMultiplier = sliderMultiplier;
 }
 void Beatmap::setSliderTickRate(float sliderTickRate){
-
+    this->sliderTickRate = sliderTickRate;
 }
 //void Beatmap::setTimingPoints(vector<TimingPoint> timingPoints){}
 void Beatmap::setColours(vector<array<int,3>> colours){

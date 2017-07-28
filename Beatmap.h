@@ -1,6 +1,8 @@
 #ifndef BEATMAP_H
 #define BEATMAP_H
 
+#include "BeatmapVersions.h"
+
 #include <array>
 #include <fstream>
 #include <string>
@@ -131,7 +133,7 @@ class Beatmap {
         void setApproachRate(float approachRate);
         void setCircleSize(float circleSize);
         void setOverallDifficulty(float overallDifficulty);
-        void setHPDrainRate(float hPDrainRate);
+        void setHPDrainRate(float HPDrainRate);
         void setSliderMultiplier(float sliderMultiplier);
         void setSliderTickRate(float sliderTickRate);
 //        void setTimingPoints(std::vector<TimingPoint> timingPoints);
