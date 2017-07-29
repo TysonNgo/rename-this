@@ -1,13 +1,12 @@
 #ifndef BEATMAP_H
 #define BEATMAP_H
 
-#include "BeatmapVersions.h"
+#include "BeatmapParser.h"
 
 #include <array>
 #include <fstream>
 #include <string>
 #include <vector>
-#include <regex>
 
 //#include "HitObject.h"
 //#include "TimingPoint.h"
@@ -94,7 +93,7 @@ class Beatmap {
         std::string getSource();
         std::string getTags();
         std::string getBeatmapID();
-        std::string getBeatmapsetID();
+        std::string getBeatmapSetID();
         float getApproachRate();
         float getCircleSize();
         float getOverallDifficulty();

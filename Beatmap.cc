@@ -1,28 +1,15 @@
 #include "Beatmap.h"
-#include "BeatmapVersions.h"
 
 using namespace std;
 
 #include <iostream>
-
-#define currentVersion 14;
 
 Beatmap::Beatmap(string b){
 
 };
 
 Beatmap::Beatmap(ifstream &b){
-    string line;
-    smatch result;
-
-    // first line of a .osu file contains the version
-    getline(b,line);
-
-    this->osuFileFormat = (
-        regex_search(line, result,regex{"v(\\d+)"})
-    ) ? stoi(result[1]) : currentVersion;
-
-    BeatmapParser::parseBeatmap(this);
+    BeatmapParser::parseBeatmap(this, b);
 };
 
 int Beatmap::getOsuFileFormat(){
@@ -97,7 +84,7 @@ string Beatmap::getTags(){
 string Beatmap::getBeatmapID(){
     return this->beatmapID;
 }
-string Beatmap::getBeatmapsetID(){
+string Beatmap::getBeatmapSetID(){
     return this->beatmapsetID;
 }
 float Beatmap::getApproachRate(){
