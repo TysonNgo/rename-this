@@ -22,21 +22,7 @@ Beatmap::Beatmap(ifstream &b){
         regex_search(line, result,regex{"v(\\d+)"})
     ) ? stoi(result[1]) : currentVersion;
 
-    switch (this->osuFileFormat){
-        // I have found that there exists only v3-14
-        case 3: //BeatmapVersions::version3(this);
-        case 4: //BeatmapVersions::version4(this);
-        case 5: //BeatmapVersions::version5(this);
-        case 6: //BeatmapVersions::version6(this);
-        case 7: //BeatmapVersions::version7(this);
-        case 8: //BeatmapVersions::version8(this);
-        case 9: //BeatmapVersions::version9(this);
-        case 10: //BeatmapVersions::version10(this);
-        case 11: //BeatmapVersions::version11(this);
-        case 12: //BeatmapVersions::version12(this);
-        case 13: //BeatmapVersions::version13(this);
-        case 14: BeatmapVersions::version14(this);
-    }
+    BeatmapParser::parseBeatmap(this);
 };
 
 int Beatmap::getOsuFileFormat(){
