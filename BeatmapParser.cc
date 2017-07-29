@@ -55,19 +55,44 @@ void parseMetadata(Beatmap* beatmap, ifstream &beatmapFile){
     while (getline(beatmapFile, line)){
 		switch (fileFormat){
 			case 14: case 13: case 12: case 11: case 10:
-				if (regex_search(line, result, titleUnicode)) {beatmap->setTitleUnicode(result[1]);}
-				else if (regex_search(line, result, artistUnicode)) {beatmap->setArtistUnicode(result[1]);}
-				else if (regex_search(line, result, beatmapID)) {beatmap->setBeatmapID(result[1]);}
-				else if (regex_search(line, result, beatmapSetID)) {beatmap->setBeatmapsetID(result[1]);}
+				if (regex_search(line, result, titleUnicode)) {
+					beatmap->setTitleUnicode(result[1]);
+				}
+				else if (regex_search(line, result, artistUnicode)) {
+					beatmap->setArtistUnicode(result[1]);
+				}
+				else if (regex_search(line, result, beatmapID)) {
+					beatmap->setBeatmapID(result[1]);
+				}
+				else if (regex_search(line, result, beatmapSetID)) {
+					beatmap->setBeatmapsetID(result[1]);
+				}
 			case 9: case 8: case 7: case 6: case 5:
-				if (regex_search(line, result, source)) {beatmap->setSource(result[1]);}
-				else if (regex_search(line, result, tags)) {beatmap->setTags(result[1]);}
+				if (regex_search(line, result, source)) {
+					beatmap->setSource(result[1]);
+				}
+				else if (regex_search(line, result, tags)) {
+					beatmap->setTags(result[1]);
+				}
 			case 4: case 3: default:
-				if (regex_search(line, result, title)) {beatmap->setTitle(result[1]);}
-				else if (regex_search(line, result, artist)) {beatmap->setArtist(result[1]);}
-				else if (regex_search(line, result, creator)) {beatmap->setCreator(result[1]);}
-				else if (regex_search(line, result, version)) {beatmap->setVersion(result[1]);}
+				if (regex_search(line, result, title)) {
+					beatmap->setTitle(result[1]);
+				}
+				else if (regex_search(line, result, artist)) {
+					beatmap->setArtist(result[1]);
+				}
+				else if (regex_search(line, result, creator)) {
+					beatmap->setCreator(result[1]);
+				}
+				else if (regex_search(line, result, version)) {
+					beatmap->setVersion(result[1]);
+				}
 		}
+	}
+
+	if (fileFormat < 10){
+		beatmap->setTitleUnicode(beatmap->getTitle());
+		beatmap->setArtistUnicode(beatmap->getArtist());
 	}
 }
 
