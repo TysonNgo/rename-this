@@ -8,7 +8,38 @@ Beatmap::Beatmap(string b){
 
 };
 
-Beatmap::Beatmap(ifstream &b){
+Beatmap::Beatmap(ifstream &b)/* :
+    audioFilename{""},
+    audioLeadIn{},
+    previewTime{},
+    countdown{},
+    sampleSet{},
+    stackLeniency{},
+    mode{},
+    letterboxInBreaks{},
+    widescreenStoryboard{},
+    distanceSpacing{},
+    beatDivisor{},
+    gridSize{},
+    timelineZoom{},
+    title{""},
+    titleUnicode{""},
+    artist{""},
+    artistUnicode{""},
+    creator{""},
+    version{""},
+    source{""},
+    tags{""},
+    beatmapID{""},
+    beatmapsetID{""},
+    approachRate{},
+    circleSize{},
+    overallDifficulty{},
+    HPDrainRate{},
+    sliderMultiplier{},
+    sliderTickRate{}
+    */
+{
     BeatmapParser::parseBeatmap(this, b);
 };
 

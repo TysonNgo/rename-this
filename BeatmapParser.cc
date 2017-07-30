@@ -1,90 +1,103 @@
 #include "BeatmapParser.h"
 
 #define latestVersion 14
+#define reAttr(attr) (regex{attr ":\\s*(.*)\\s*"})
 
 using namespace std;
 
 /*
-switch (beatmap->getOsuFileFormat()){
-		case 14:
-		case 13:
-		case 12:
-		case 11:
-		case 10:
-		case 9:
-		case 8:
-		case 7:
-		case 6:
-		case 5:
-		case 4:
-		case 3:
-		default:
-			
-	}
+	implement parseGeneral
+	implement parseEditor
+	implement parseEvents
+	implement parseTimingPoints
+	implement parseColours
+	implement parseHitObjects
 */
 
 void parseGeneral(Beatmap* beatmap, ifstream &beatmapFile){
+	string line;
+    smatch result;
+    char next;
+    int fileFormat = beatmap->getOsuFileFormat();
 
+    while (getline(beatmapFile, line)){
+    	next = beatmapFile.peek(); if (next == '['){break;}
+
+		switch (fileFormat){
+			case 14: case 13: case 12: case 11:
+			case 10: case 9: case 8: case 7: case 6:
+			case 5: case 4: case 3: default: break;
+		}
+	}
 }
 
 void parseEditor(Beatmap* beatmap, ifstream &beatmapFile){
+	string line;
+    smatch result;
+    char next;
+    int fileFormat = beatmap->getOsuFileFormat();
 
+    while (getline(beatmapFile, line)){
+    	next = beatmapFile.peek(); if (next == '['){break;}
+
+		switch (fileFormat){
+			case 14: case 13: case 12: case 11:
+			case 10: case 9: case 8: case 7: case 6:
+			case 5: case 4: case 3: default: break;
+		}
+	}
 }
 
 void parseMetadata(Beatmap* beatmap, ifstream &beatmapFile){
 	string line;
     smatch result;
+    char next;
     int fileFormat = beatmap->getOsuFileFormat();
 
-    // v3 v4
-    regex title = regex{"Title:\\s*(.*)\\s*"};
-    regex artist = regex{"Artist:\\s*(.*)\\s*"};
-    regex creator = regex{"Creator:\\s*(.*)\\s*"};
-    regex version = regex{"Version:\\s*(.*)\\s*"};
+    // v3-14
+    regex title = reAttr("Title");
+    regex artist = reAttr("Artist");
+    regex creator = reAttr("Creator");
+    regex version = reAttr("Version");
 
-    // v5-9
-    regex source = regex{"Source:\\s*(.*)\\s*"};
-    regex tags = regex{"Tags:\\s*(.*)\\s*"};
+    // v5-14
+    regex source = reAttr("Source");
+    regex tags = reAttr("Tags");
 
     // v10-14
-    regex titleUnicode = regex{"TitleUnicode:\\s*(.*)\\s*"};
-    regex artistUnicode = regex{"ArtistUnicode:\\s*(.*)\\s*"};
-    regex beatmapID = regex{"BeatmapID:\\s*(.*)\\s*"};
-    regex beatmapSetID = regex{"BeatmapSetID:\\s*(.*)\\s*"};
+    regex titleUnicode = reAttr("TitleUnicode");
+    regex artistUnicode = reAttr("ArtistUnicode");
+    regex beatmapID = reAttr("BeatmapID");
+    regex beatmapSetID = reAttr("BeatmapSetID");
 
     while (getline(beatmapFile, line)){
+    	next = beatmapFile.peek(); if (next == '['){break;}
+
 		switch (fileFormat){
 			case 14: case 13: case 12: case 11: case 10:
 				if (regex_search(line, result, titleUnicode)) {
 					beatmap->setTitleUnicode(result[1]);
-				}
-				else if (regex_search(line, result, artistUnicode)) {
+				} else if (regex_search(line, result, artistUnicode)) {
 					beatmap->setArtistUnicode(result[1]);
-				}
-				else if (regex_search(line, result, beatmapID)) {
+				} else if (regex_search(line, result, beatmapID)) {
 					beatmap->setBeatmapID(result[1]);
-				}
-				else if (regex_search(line, result, beatmapSetID)) {
+				} else if (regex_search(line, result, beatmapSetID)) {
 					beatmap->setBeatmapsetID(result[1]);
 				}
 			case 9: case 8: case 7: case 6: case 5:
 				if (regex_search(line, result, source)) {
 					beatmap->setSource(result[1]);
-				}
-				else if (regex_search(line, result, tags)) {
+				} else if (regex_search(line, result, tags)) {
 					beatmap->setTags(result[1]);
 				}
 			case 4: case 3: default:
 				if (regex_search(line, result, title)) {
 					beatmap->setTitle(result[1]);
-				}
-				else if (regex_search(line, result, artist)) {
+				} else if (regex_search(line, result, artist)) {
 					beatmap->setArtist(result[1]);
-				}
-				else if (regex_search(line, result, creator)) {
+				} else if (regex_search(line, result, creator)) {
 					beatmap->setCreator(result[1]);
-				}
-				else if (regex_search(line, result, version)) {
+				} else if (regex_search(line, result, version)) {
 					beatmap->setVersion(result[1]);
 				}
 		}
@@ -97,23 +110,117 @@ void parseMetadata(Beatmap* beatmap, ifstream &beatmapFile){
 }
 
 void parseDifficulty(Beatmap* beatmap, ifstream &beatmapFile){
+	string line;
+    smatch result;
+    char next;
+    int fileFormat = beatmap->getOsuFileFormat();
 
+    cout << "asd" << endl;
+
+    // v8-14
+	regex ar = reAttr("ApproachRate");
+
+	// v3-14
+	regex cs = reAttr("CircleSize");
+	regex od = reAttr("OverallDifficulty");
+	regex hp = reAttr("HPDrainRate");
+	regex sliderMultiplier = reAttr("SliderMultiplier");
+	regex sliderTickRate = reAttr("SliderTickRate");
+	
+	while (getline(beatmapFile, line)){
+		next = beatmapFile.peek(); if (next == '['){break;}
+		switch (fileFormat){
+			case 14: case 13: case 12: case 11:
+			case 10: case 9: case 8:
+				if (regex_search(line, result, ar)){
+					beatmap->setApproachRate(stof(result[1]));
+				}
+			case 7: case 6: case 5: case 4: case 3: default:
+				if (regex_search(line, result, cs)){
+					beatmap->setCircleSize(stof(result[1]));
+				} else if (regex_search(line, result, od)){
+					beatmap->setOverallDifficulty(stof(result[1]));
+				} else if (regex_search(line, result, hp)){
+					beatmap->setHPDrainRate(stof(result[1]));
+				} else if (regex_search(line, result, sliderMultiplier)){
+					beatmap->setSliderMultiplier(stof(result[1]));
+				} else if (regex_search(line, result, sliderTickRate)){
+					beatmap->setSliderTickRate(stof(result[1]));
+				}
+		}
+	}
+
+	if (fileFormat < 8){
+		beatmap->setApproachRate(beatmap->getOverallDifficulty());
+	}
 }
 
 void parseEvents(Beatmap* beatmap, ifstream &beatmapFile){
+	string line;
+    smatch result;
+    char next;
+    int fileFormat = beatmap->getOsuFileFormat();
 
+    while (getline(beatmapFile, line)){
+    	next = beatmapFile.peek(); if (next == '['){break;}
+
+		switch (fileFormat){
+			case 14: case 13: case 12: case 11:
+			case 10: case 9: case 8: case 7: case 6:
+			case 5: case 4: case 3: default: break;
+		}
+	}
 }
 
 void parseTimingPoints(Beatmap* beatmap, ifstream &beatmapFile){
+	string line;
+    smatch result;
+    char next;
+    int fileFormat = beatmap->getOsuFileFormat();
 
+    while (getline(beatmapFile, line)){
+    	next = beatmapFile.peek(); if (next == '['){break;}
+
+		switch (fileFormat){
+			case 14: case 13: case 12: case 11:
+			case 10: case 9: case 8: case 7: case 6:
+			case 5: case 4: case 3: default: break;
+		}
+	}
 }
 
 void parseColours(Beatmap* beatmap, ifstream &beatmapFile){
+	string line;
+    smatch result;
+    char next;
+    int fileFormat = beatmap->getOsuFileFormat();
 
+    while (getline(beatmapFile, line)){
+    	next = beatmapFile.peek(); if (next == '['){break;}
+
+		switch (fileFormat){
+			case 14: case 13: case 12: case 11:
+			case 10: case 9: case 8: case 7: case 6:
+			case 5: case 4: case 3: default: break;
+		}
+	}
 }
 
 void parseHitObjects(Beatmap* beatmap, ifstream &beatmapFile){
+	string line;
+    smatch result;
+    char next;
+    int fileFormat = beatmap->getOsuFileFormat();
 
+    while (getline(beatmapFile, line)){
+    	next = beatmapFile.peek(); if (next == '['){break;}
+
+		switch (fileFormat){
+			case 14: case 13: case 12: case 11:
+			case 10: case 9: case 8: case 7: case 6:
+			case 5: case 4: case 3: default: break;
+		}
+	}
 }
 
 namespace BeatmapParser{
