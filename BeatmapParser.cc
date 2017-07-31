@@ -7,10 +7,8 @@ using namespace std;
 
 /*
 	implement parseGeneral
-	implement parseEditor
 	implement parseEvents
 	implement parseTimingPoints
-	implement parseColours
 	implement parseHitObjects
 */
 
@@ -37,13 +35,36 @@ void parseEditor(Beatmap* beatmap, ifstream &beatmapFile){
     char next;
     int fileFormat = beatmap->getOsuFileFormat();
 
+    // the [Editor] header exists from v6-14
+    regex bookmarks = reAttr("Bookmarks");
+	regex distanceSpacing = reAttr("DistanceSpacing");
+	regex beatDivisor = reAttr("BeatDivisor");
+	regex gridSize = reAttr("GridSize");
+
     while (getline(beatmapFile, line)){
     	next = beatmapFile.peek(); if (next == '['){break;}
 
 		switch (fileFormat){
+			case 5: case 4: case 3: default:
+				break;
 			case 14: case 13: case 12: case 11:
 			case 10: case 9: case 8: case 7: case 6:
-			case 5: case 4: case 3: default: break;
+				if (regex_search(line, result, bookmarks)) {
+					string bookmark = result[1];
+					stringstream ss{bookmark};
+					vector<int> theBookmarks;
+					while (getline(ss, bookmark, ',')){
+						cout << bookmark << endl;
+						theBookmarks.push_back(stoi(bookmark));
+					}
+					beatmap->setBookmarks(theBookmarks);
+				} else if (regex_search(line, result, distanceSpacing)) {
+					beatmap->setDistanceSpacing(stof(result[1]));
+				} else if (regex_search(line, result, beatDivisor)) {
+					beatmap->setBeatDivisor(stoi(result[1]));
+				} else if (regex_search(line, result, gridSize)) {
+					beatmap->setGridSize(stoi(result[1]));
+				}
 		}
 	}
 }

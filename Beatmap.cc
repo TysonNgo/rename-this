@@ -53,7 +53,7 @@ int Beatmap::getWidescreenStoryboard() const{
 }
 
 vector<int> Beatmap::getBookmarks() const{
-    return bookmarks;
+    return this->bookmarks;
 }
 
 float Beatmap::getDistanceSpacing() const{
@@ -183,7 +183,7 @@ void Beatmap::setWidescreenStoryboard(int widescreenStoryboard){
 }
 
 void Beatmap::setBookmarks(vector<int> bookmarks){
-
+    this->bookmarks = bookmarks;
 }
 
 void Beatmap::setDistanceSpacing(float distanceSpacing){
