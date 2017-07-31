@@ -8,7 +8,9 @@ Beatmap::Beatmap(string b){
 
 };
 
-Beatmap::Beatmap(ifstream &b){
+Beatmap::Beatmap(ifstream &b) : 
+    sampleSet{"Normal"}
+{
     BeatmapParser::parseBeatmap(this, b);
 };
 
@@ -163,7 +165,11 @@ void Beatmap::setCountdown(int countdown){
 }
 
 void Beatmap::setSampleSet(string sampleSet){
-    this->sampleSet = sampleSet;
+    if ((sampleSet == "Normal") ||
+        (sampleSet == "Soft") ||
+        (sampleSet == "None")){
+        this->sampleSet = sampleSet;
+    }
 }
 
 void Beatmap::setStackLeniency(float stackLeniency){

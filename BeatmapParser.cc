@@ -6,11 +6,24 @@
 using namespace std;
 
 /*
-	implement parseGeneral
 	implement parseEvents
 	implement parseTimingPoints
 	implement parseHitObjects
 */
+
+vector<int> getBookmarks(string bookmarks){
+	// bookmarks is a list of comma separated integers
+	// ie. 123, 2315, 5000, 6313
+	string bookmark = bookmarks;
+	stringstream ss{bookmark};
+	vector<int> result;
+
+	while (getline(ss, bookmark, ',')){
+		result.push_back(stoi(bookmark));
+	}
+
+	return result;
+}
 
 void parseGeneral(Beatmap* beatmap, ifstream &beatmapFile){
 	string line;
@@ -18,13 +31,45 @@ void parseGeneral(Beatmap* beatmap, ifstream &beatmapFile){
     char next;
     int fileFormat = beatmap->getOsuFileFormat();
 
+    // v3-5 the bookmarks are included in [General] header
+    regex editorBookmarks = reAttr("EditorBookmarks");
+
+	regex audioFilename = reAttr("AudioFilename");
+	regex audioLeadIn = reAttr("AudioLeadIn");
+	regex previewTime = reAttr("PreviewTime");
+	regex countdown = reAttr("Countdown");
+	regex sampleSet = reAttr("SampleSet");
+	regex stackLeniency = reAttr("StackLeniency");
+	regex mode = reAttr("Mode");
+	regex letterboxInBreaks = reAttr("LetterboxInBreaks");
+
     while (getline(beatmapFile, line)){
     	next = beatmapFile.peek(); if (next == '['){break;}
 
 		switch (fileFormat){
+			case 5: case 4: case 3: default:
+				if (regex_search(line, result, editorBookmarks)){
+					beatmap->setBookmarks(getBookmarks(result[1]));
+				}
 			case 14: case 13: case 12: case 11:
 			case 10: case 9: case 8: case 7: case 6:
-			case 5: case 4: case 3: default: break;
+				if (regex_search(line, result, audioFilename)){
+					beatmap->setAudioFilename(result[1]);
+				} else if (regex_search(line, result, audioLeadIn)){
+					beatmap->setAudioLeadIn(stoi(result[1]));
+				} else if (regex_search(line, result, previewTime)){
+					beatmap->setPreviewTime(stoi(result[1]));
+				} else if (regex_search(line, result, countdown)){
+					beatmap->setCountdown(stoi(result[1]));
+				} else if (regex_search(line, result, sampleSet)){
+					beatmap->setSampleSet(result[1]);
+				} else if (regex_search(line, result, stackLeniency)){
+					beatmap->setStackLeniency(stof(result[1]));
+				} else if (regex_search(line, result, mode)){
+					beatmap->setMode(stoi(result[1]));
+				} else if (regex_search(line, result, letterboxInBreaks)){
+					beatmap->setLetterboxInBreaks(stoi(result[1]));
+				}
 		}
 	}
 }
@@ -50,14 +95,7 @@ void parseEditor(Beatmap* beatmap, ifstream &beatmapFile){
 			case 14: case 13: case 12: case 11:
 			case 10: case 9: case 8: case 7: case 6:
 				if (regex_search(line, result, bookmarks)) {
-					string bookmark = result[1];
-					stringstream ss{bookmark};
-					vector<int> theBookmarks;
-					while (getline(ss, bookmark, ',')){
-						cout << bookmark << endl;
-						theBookmarks.push_back(stoi(bookmark));
-					}
-					beatmap->setBookmarks(theBookmarks);
+					beatmap->setBookmarks(getBookmarks(result[1]));
 				} else if (regex_search(line, result, distanceSpacing)) {
 					beatmap->setDistanceSpacing(stof(result[1]));
 				} else if (regex_search(line, result, beatDivisor)) {
