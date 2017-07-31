@@ -195,6 +195,8 @@ void parseColours(Beatmap* beatmap, ifstream &beatmapFile){
     char next;
     int fileFormat = beatmap->getOsuFileFormat();
 
+    // v3 and v4 do not appear to have combo colours
+
     while (getline(beatmapFile, line)){
     	next = beatmapFile.peek(); if (next == '['){break;}
 

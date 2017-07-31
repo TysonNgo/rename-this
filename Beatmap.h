@@ -2,8 +2,8 @@
 #define BEATMAP_H
 
 #include "BeatmapParser.h"
+#include "ComboColour.h"
 
-#include <array>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -62,47 +62,47 @@ class Beatmap {
 //        std::vector<TimingPoint> timingPoints;
 
         // Colours
-        std::vector<std::array<int,3>> colours;
+        std::vector<ComboColour> comboColours;
 
 //        std::vector<HitObject> hitObjects;
     public:
         Beatmap(std::string b);
         Beatmap(std::ifstream &b);
         
-        int getOsuFileFormat();
-        std::string getAudioFilename();
-        int getAudioLeadIn();
-        int getPreviewTime();
-        int getCountdown();
-        std::string getSampleSet();
-        float getStackLeniency();
-        int getMode();
-        int getLetterboxInBreaks();
-        int getWidescreenStoryboard();
-        std::vector<int> getBookmarks();
-        float getDistanceSpacing();
-        int getBeatDivisor();
-        int getGridSize();
-        int getTimelineZoom();
-        std::string getTitle();
-        std::string getTitleUnicode();
-        std::string getArtist();
-        std::string getArtistUnicode();
-        std::string getCreator();
-        std::string getVersion();
-        std::string getSource();
-        std::string getTags();
-        std::string getBeatmapID();
-        std::string getBeatmapSetID();
-        float getApproachRate();
-        float getCircleSize();
-        float getOverallDifficulty();
-        float getHPDrainRate();
-        float getSliderMultiplier();
-        float getSliderTickRate();
-//        std::vector<TimingPoint> getTimingPoints();
-        std::vector<std::array<int,3>> getColours();
-//        std::vector<HitObject> getHitObjects();
+        int getOsuFileFormat() const;
+        std::string getAudioFilename() const;
+        int getAudioLeadIn() const;
+        int getPreviewTime() const;
+        int getCountdown() const;
+        std::string getSampleSet() const;
+        float getStackLeniency() const;
+        int getMode() const;
+        int getLetterboxInBreaks() const;
+        int getWidescreenStoryboard() const;
+        std::vector<int> getBookmarks() const;
+        float getDistanceSpacing() const;
+        int getBeatDivisor() const;
+        int getGridSize() const;
+        int getTimelineZoom() const;
+        std::string getTitle() const;
+        std::string getTitleUnicode() const;
+        std::string getArtist() const;
+        std::string getArtistUnicode() const;
+        std::string getCreator() const;
+        std::string getVersion() const;
+        std::string getSource() const;
+        std::string getTags() const;
+        std::string getBeatmapID() const;
+        std::string getBeatmapSetID() const;
+        float getApproachRate() const;
+        float getCircleSize() const;
+        float getOverallDifficulty() const;
+        float getHPDrainRate() const;
+        float getSliderMultiplier() const;
+        float getSliderTickRate() const;
+//        std::vector<TimingPoint> getTimingPoints() const;
+        std::vector<ComboColour> getComboColours() const;
+//        std::vector<HitObject> getHitObjects() const;
 
         void setOsuFileFormat(int osuFileFormat);
         void setAudioFilename(std::string audioFilename);
@@ -136,9 +136,9 @@ class Beatmap {
         void setSliderMultiplier(float sliderMultiplier);
         void setSliderTickRate(float sliderTickRate);
 //        void setTimingPoints(std::vector<TimingPoint> timingPoints);
-        void setColours(std::vector<std::array<int,3>> colours);
 //        void setHitObjects(std::vector<HitObject> hitObjects);
 
+        void addComboColour(int r, int g, int b);
         void saveBeatmap();
 };
 

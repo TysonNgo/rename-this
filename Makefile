@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -MMD
 EXEC = a
-OBJECTS = main.o Beatmap.o BeatmapParser.o
+OBJECTS = main.o Beatmap.o BeatmapParser.o ComboColour.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
