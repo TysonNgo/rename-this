@@ -5,6 +5,7 @@
 #include "ComboColour.h"
 
 #include <fstream>
+#include <map>
 #include <string>
 #include <vector>
 
@@ -62,7 +63,7 @@ class Beatmap {
 //        std::vector<TimingPoint> timingPoints;
 
         // Colours
-        std::vector<ComboColour> comboColours;
+        std::map<int, ComboColour> comboColours;
 
 //        std::vector<HitObject> hitObjects;
     public:
@@ -101,7 +102,7 @@ class Beatmap {
         float getSliderMultiplier() const;
         float getSliderTickRate() const;
 //        std::vector<TimingPoint> getTimingPoints() const;
-        std::vector<ComboColour> getComboColours() const;
+        std::map<int, ComboColour> getComboColours() const;
 //        std::vector<HitObject> getHitObjects() const;
 
         void setOsuFileFormat(int osuFileFormat);
@@ -136,9 +137,8 @@ class Beatmap {
         void setSliderMultiplier(float sliderMultiplier);
         void setSliderTickRate(float sliderTickRate);
 //        void setTimingPoints(std::vector<TimingPoint> timingPoints);
+        void setComboColour(int comboNumber, int r, int g, int b);
 //        void setHitObjects(std::vector<HitObject> hitObjects);
-
-        void addComboColour(int r, int g, int b);
         void saveBeatmap();
 };
 

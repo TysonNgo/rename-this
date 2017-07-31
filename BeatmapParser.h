@@ -6,6 +6,7 @@
 #include <iostream>
 #include <regex>
 #include "Beatmap.h"
+#include "ComboColour.h"
 
 class Beatmap;
 

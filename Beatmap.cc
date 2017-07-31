@@ -137,7 +137,7 @@ float Beatmap::getSliderTickRate() const{
 }
 
 //vector<TimingPoint> Beatmap::getTimingPoints(){}
-vector<ComboColour> Beatmap::getComboColours() const{
+map<int, ComboColour> Beatmap::getComboColours() const{
     return this->comboColours;
 }
 //vector<HitObject> Beatmap::getHitObjects(){}
@@ -267,11 +267,12 @@ void Beatmap::setSliderTickRate(float sliderTickRate){
 }
 
 //void Beatmap::setTimingPoints(vector<TimingPoint> timingPoints){}
-//void Beatmap::setHitObjects(vector<HitObject> hitObjects){}
 
-void Beatmap::addComboColour(int r, int g, int b){
-    this->comboColours.push_back(ComboColour{r, g, b});
+void Beatmap::setComboColour(int comboNumber, int r, int g, int b){
+    this->comboColours[comboNumber] = ComboColour{r, g, b};
 }
+
+//void Beatmap::setHitObjects(vector<HitObject> hitObjects){}
 
 void Beatmap::saveBeatmap(){
 

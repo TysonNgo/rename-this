@@ -9,6 +9,7 @@ private:
 
 	void setColour(int &rgb, int rgbValue);
 public:
+	ComboColour();
 	ComboColour(int r, int g, int b);
 	int getRed() const;
 	int getGreen() const;

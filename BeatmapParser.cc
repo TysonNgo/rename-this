@@ -194,8 +194,17 @@ void parseColours(Beatmap* beatmap, ifstream &beatmapFile){
     smatch result;
     char next;
     int fileFormat = beatmap->getOsuFileFormat();
+    int comboNumber;
+    int r, g, b;
 
     // v3 and v4 do not appear to have combo colours
+    regex combo = regex{
+    	"Combo(\\d+)\\s*:\\s*"
+    	"(\\s*\\d+\\s*),"
+    	"(\\s*\\d+\\s*),"
+    	"(\\s*\\d+\\s*)"
+    	"\\s*"
+    };
 
     while (getline(beatmapFile, line)){
     	next = beatmapFile.peek(); if (next == '['){break;}
@@ -203,7 +212,14 @@ void parseColours(Beatmap* beatmap, ifstream &beatmapFile){
 		switch (fileFormat){
 			case 14: case 13: case 12: case 11:
 			case 10: case 9: case 8: case 7: case 6:
-			case 5: case 4: case 3: default: break;
+			case 5: case 4: case 3: default:
+			if (regex_search(line, result, combo)){
+				comboNumber = stoi(result[1]);
+				r = stoi(result[2]);
+				g = stoi(result[3]);
+				b = stoi(result[4]);
+				beatmap->setComboColour(comboNumber, r, g, b);
+			}
 		}
 	}
 }

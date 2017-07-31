@@ -1,5 +1,7 @@
 #include "ComboColour.h"
 
+ComboColour::ComboColour() : r{0}, g{0}, b{0} {};
+
 ComboColour::ComboColour(int r, int g, int b){
 	this->setRed(r);
 	this->setGreen(g);
@@ -41,3 +43,4 @@ void ComboColour::setGreen(int g){
 void ComboColour::setBlue(int b){
 	this->setColour(this->b, b);
 }
+
