@@ -54,7 +54,7 @@ SliderTickRate:
 
 [TimingPoints]
 
-offset,mspb,meter
+offset,mspb
 
 
 
