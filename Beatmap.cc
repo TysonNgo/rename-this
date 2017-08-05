@@ -4,6 +4,9 @@ using namespace std;
 
 #include <iostream>
 
+Beatmap::Beatmap(){
+};
+
 Beatmap::Beatmap(string b){
 
 };
@@ -138,7 +141,10 @@ float Beatmap::getSliderTickRate() const{
     return this->sliderTickRate;
 }
 
-//vector<TimingPoint> Beatmap::getTimingPoints(){}
+vector<TimingPoint> Beatmap::getTimingPoints() const{
+    return this->timingPoints;
+}
+
 map<int, ComboColour> Beatmap::getComboColours() const{
     return this->comboColours;
 }
@@ -272,13 +278,32 @@ void Beatmap::setSliderTickRate(float sliderTickRate){
     this->sliderTickRate = sliderTickRate;
 }
 
-//void Beatmap::setTimingPoints(vector<TimingPoint> timingPoints){}
-
 void Beatmap::setComboColour(int comboNumber, int r, int g, int b){
     this->comboColours[comboNumber] = ComboColour{r, g, b};
 }
 
 //void Beatmap::setHitObjects(vector<HitObject> hitObjects){}
+
+void Beatmap::insertTimingPoint(TimingPoint& timingPoint){
+    int t1, t2;
+    vector<TimingPoint>* tps = &this->timingPoints;
+    t2 = timingPoint.getOffset();
+
+    if (tps->size() == 0 || 
+       (t2 >= tps->back().getOffset())){
+        tps->push_back(timingPoint);
+    } else{
+        int index = 0;
+        for (size_t i=0; i<tps->size();i++){
+            t1 = (*tps)[i].getOffset();
+            if (t2 >= t1){
+                tps->insert(tps->begin()+index, timingPoint);
+                return;
+            }
+            index++;
+        }
+    }
+}
 
 void Beatmap::saveBeatmap(){
 

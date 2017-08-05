@@ -10,7 +10,7 @@
 #include <vector>
 
 //#include "HitObject.h"
-//#include "TimingPoint.h"
+#include "TimingPoint.h"
 
 class Beatmap {
     private:
@@ -60,13 +60,14 @@ class Beatmap {
         // besides break periods, I am not entirely sure
         // what goes here at the moment
 
-//        std::vector<TimingPoint> timingPoints;
+        std::vector<TimingPoint> timingPoints;
 
         // Colours
         std::map<int, ComboColour> comboColours;
 
 //        std::vector<HitObject> hitObjects;
     public:
+        Beatmap();
         Beatmap(std::string b);
         Beatmap(std::ifstream &b);
         
@@ -101,7 +102,7 @@ class Beatmap {
         float getHPDrainRate() const;
         float getSliderMultiplier() const;
         float getSliderTickRate() const;
-//        std::vector<TimingPoint> getTimingPoints() const;
+        std::vector<TimingPoint> getTimingPoints() const;
         std::map<int, ComboColour> getComboColours() const;
 //        std::vector<HitObject> getHitObjects() const;
 
@@ -136,9 +137,9 @@ class Beatmap {
         void setHPDrainRate(float HPDrainRate);
         void setSliderMultiplier(float sliderMultiplier);
         void setSliderTickRate(float sliderTickRate);
-//        void setTimingPoints(std::vector<TimingPoint> timingPoints);
         void setComboColour(int comboNumber, int r, int g, int b);
 //        void setHitObjects(std::vector<HitObject> hitObjects);
+        void insertTimingPoint(TimingPoint& timingPoint);
         void saveBeatmap();
 };
 

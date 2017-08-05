@@ -7,7 +7,7 @@
 
 class TimingPoint {
 private:
-	int offset;
+	long offset;
 	double mspb;
 	int meter;
 	int sampleType;

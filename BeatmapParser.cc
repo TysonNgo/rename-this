@@ -174,8 +174,6 @@ void parseDifficulty(Beatmap* beatmap, ifstream &beatmapFile){
     char next;
     int fileFormat = beatmap->getOsuFileFormat();
 
-    cout << "asd" << endl;
-
     // v8-14
 	regex ar = reAttr("ApproachRate");
 
@@ -235,16 +233,12 @@ void parseTimingPoints(Beatmap* beatmap, ifstream &beatmapFile){
 	string line;
     smatch result;
     char next;
-    int fileFormat = beatmap->getOsuFileFormat();
 
     while (getline(beatmapFile, line)){
     	next = beatmapFile.peek(); if (next == '['){break;}
 
-		switch (fileFormat){
-			case 14: case 13: case 12: case 11:
-			case 10: case 9: case 8: case 7: case 6:
-			case 5: case 4: case 3: default: break;
-		}
+    	TimingPoint tp{line};
+    	beatmap->insertTimingPoint(tp);
 	}
 }
 

@@ -3,8 +3,13 @@
 using namespace std;
 
 TimingPoint::TimingPoint(string tp):
-	volume{100}
+	meter{4},
+	sampleType{1},
+	sampleSet{1},
+	volume{100},
+	inherited{1}
 {
+	if (tp.length() <= 1){return;}
 	string line;
 	stringstream ss{tp};
 
@@ -13,14 +18,16 @@ TimingPoint::TimingPoint(string tp):
 
 	while (getline(ss, line, ',')){
 		switch(i){
-			case 0: this->offset = stoi(line); break;
+			case 0: this->offset = stol(line); break;
 			case 1: this->mspb = stod(line); break;
 			case 2: this->meter = stoi(line); break;
 			case 3: this->sampleType = stoi(line); break;
 			case 4: this->sampleSet = stoi(line); break;
 			case 5: 
 				vol = stoi(line);
-				this->volume = (vol >=0 && vol<=100) ? vol : 100; 
+				if (vol >=0 && vol<=100){
+					this->volume = vol; 
+				}
 				break;
 			case 6: this->inherited = stoi(line); break;
 			case 7: this->kiai = stoi(line); break;
