@@ -296,12 +296,10 @@ void Beatmap::insertTimingPoint(TimingPoint& timingPoint){
         int index = 0;
         for (size_t i=0; i<tps->size();i++){
             t1 = (*tps)[i].getOffset();
-            if (t2 >= t1){
-                tps->insert(tps->begin()+index, timingPoint);
-                return;
-            }
-            index++;
+            if (t2 >= t1){ index++; }
+            else{ break; }
         }
+        tps->insert(tps->begin()+index, timingPoint);
     }
 }
 

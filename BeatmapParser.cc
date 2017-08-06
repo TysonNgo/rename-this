@@ -7,7 +7,6 @@ using namespace std;
 
 /*
 	implement parseEvents
-	implement parseTimingPoints
 	implement parseHitObjects
 */
 
@@ -213,6 +212,7 @@ void parseDifficulty(Beatmap* beatmap, ifstream &beatmapFile){
 }
 
 void parseEvents(Beatmap* beatmap, ifstream &beatmapFile){
+	/*
 	string line;
     smatch result;
     char next;
@@ -226,7 +226,7 @@ void parseEvents(Beatmap* beatmap, ifstream &beatmapFile){
 			case 10: case 9: case 8: case 7: case 6:
 			case 5: case 4: case 3: default: break;
 		}
-	}
+	}*/
 }
 
 void parseTimingPoints(Beatmap* beatmap, ifstream &beatmapFile){
