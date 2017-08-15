@@ -11,6 +11,7 @@ Beatmap::Beatmap() :
     countdown{1},
     sampleSet{"Normal"},
     stackLeniency{0.7},
+    mode{0},
     letterboxInBreaks{0},
     widescreenStoryboard{0},
 
