@@ -4,11 +4,43 @@ using namespace std;
 
 #include <iostream>
 
-Beatmap::Beatmap(){
-    
+Beatmap::Beatmap() :
+    audioFilename{"audio.mp3"},
+    audioLeadIn{0},
+    previewTime{-1},
+    countdown{1},
+    sampleSet{"Normal"},
+    stackLeniency{0.7},
+    letterboxInBreaks{0},
+    widescreenStoryboard{0},
+
+    distanceSpacing{0.8},
+    beatDivisor{4},
+    gridSize{32},
+    timelineZoom{1},
+
+    title{""},
+    titleUnicode{""},
+    artist{""},
+    artistUnicode{""},
+    creator{""},
+    version{""},
+    source{""},
+    tags{""},
+    beatmapID{"0"},
+    beatmapsetID{"-1"},
+
+    approachRate{5}
+    circleSize{5}
+    overallDifficulty{5}
+    HPDrainRate{5}
+    sliderMultiplier{1.4}
+    sliderTickRate{1}
+{
 };
 
-Beatmap::Beatmap(string b)
+Beatmap::Beatmap(string b) : 
+    sampleSet{"Normal"}
 {
     ifstream f{b};
     BeatmapParser::parseBeatmap(this, f);
