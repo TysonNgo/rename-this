@@ -48,10 +48,6 @@ void HitObject::setTime(int time){
 	this->time = time;
 }
 
-void HitObject::setType(int type){
-	this->type = type;
-}
-
 void HitObject::setHitSound(int hitSound){
 	this->hitSound = hitSound;
 }

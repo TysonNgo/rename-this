@@ -16,8 +16,6 @@
 // x,y,time,type,hitSound,endTime,addition
 // 256,192,730,8,8,3983
 
-class Addition;
-
 struct Point{
 	int x;
 	int y;
@@ -53,11 +51,11 @@ public:
 	int getType() const;
 	int getHitSound() const;
 
-	void setPoint(int x, int y);
-	void setX(int x);
-	void setY(int y);
+	// virtual because spinner points should not change
+	virtual void setPoint(int x, int y);
+	virtual void setX(int x);
+	virtual void setY(int y);
 	void setTime(int time);
-	void setType(int type);
 	void setHitSound(int hitSound);
 
 	virtual int getEndTime() const = 0;

@@ -5,10 +5,14 @@ using namespace std;
 #include <iostream>
 
 Beatmap::Beatmap(){
+    
 };
 
-Beatmap::Beatmap(string b){
-
+Beatmap::Beatmap(string b)
+{
+    ifstream f{b};
+    BeatmapParser::parseBeatmap(this, f);
+    f.close();
 };
 
 Beatmap::Beatmap(ifstream &b) : 
